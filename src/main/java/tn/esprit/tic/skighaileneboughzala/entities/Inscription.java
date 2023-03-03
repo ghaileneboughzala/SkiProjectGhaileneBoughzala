@@ -27,6 +27,7 @@ public class Inscription {
 
     @ManyToOne
     @JsonIgnore
+
     private Skieur skieur;
 
 
