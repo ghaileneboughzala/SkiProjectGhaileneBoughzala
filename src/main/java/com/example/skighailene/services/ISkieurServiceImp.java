@@ -2,6 +2,7 @@ package com.example.skighailene.services;
 
 import com.example.skighailene.entities.*;
 import com.example.skighailene.repositories.AbonnementRepository;
+import com.example.skighailene.repositories.CoursRepository;
 import com.example.skighailene.repositories.PisteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,9 @@ public class ISkieurServiceImp implements ISkieurService{
     PisteRepository pisteRepo;
     @Autowired
     AbonnementRepository abonnementRepo;
+    @Autowired
+    private CoursRepository coursRepository;
+
     @Override
     public List<Skieur> retrieveAllSkieurs() {
         return  skieurRepository.findAll();
@@ -95,7 +99,17 @@ public class ISkieurServiceImp implements ISkieurService{
 
     @Override
     public Skieur addSkierAndAssignToCourse(Skieur skieur) {
-        return null;
+        Assert.notNull(skieur.getAbonnement(),"Abonnement must not be empty");
+        Assert.notNull(skieur.getInscriptions(),"Inscriptions must not be empty");
+        Set<Inscription> inscriptions=skieur.getInscriptions();
+        inscriptions.forEach(inscription ->  {
+            Assert.notNull(inscription.getCours().getNumCours(), " Cours must be entered !!");
+            Cours cours = coursRepository.findById(inscription.getCours().getNumCours()).orElse(null);
+            Assert.notNull(cours, " No cours found with this id!");
+            inscription.setCours(cours);
+        });
+
+        return skieur;
     }
 
 
