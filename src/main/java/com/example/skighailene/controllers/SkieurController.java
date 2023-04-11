@@ -65,4 +65,9 @@ public class SkieurController {
         return iSkieurService.findByMoniteurNameAndSupportTypeJPQL(support, nom);
         //r
     }
+
+    @PostMapping("addSkierAndAssignToCourse")
+    Skieur addSkierAndAssignToCourse(@RequestBody Skieur skieur){
+        return iSkieurService.addSkierAndAssignToCourse(skieur);
+    }
 }

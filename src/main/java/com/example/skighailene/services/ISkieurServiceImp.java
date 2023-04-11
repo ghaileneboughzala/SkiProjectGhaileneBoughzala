@@ -92,4 +92,11 @@ public class ISkieurServiceImp implements ISkieurService{
     public List<Skieur> retrieveSkiersBySubscriptionType(TypeAbonnement typeAbonnement) {
         return skieurRepository.findByAbonnementTypeAbon(typeAbonnement);
     }
+
+    @Override
+    public Skieur addSkierAndAssignToCourse(Skieur skieur) {
+        return null;
+    }
+
+
 }
