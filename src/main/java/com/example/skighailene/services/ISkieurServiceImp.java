@@ -1,12 +1,9 @@
 package com.example.skighailene.services;
 
 import com.example.skighailene.entities.*;
-import com.example.skighailene.repositories.AbonnementRepository;
-import com.example.skighailene.repositories.CoursRepository;
-import com.example.skighailene.repositories.PisteRepository;
+import com.example.skighailene.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.example.skighailene.repositories.SkieurRepository;
 import org.springframework.util.Assert;
 
 import java.util.List;
@@ -23,6 +20,8 @@ public class ISkieurServiceImp implements ISkieurService{
     AbonnementRepository abonnementRepo;
     @Autowired
     private CoursRepository coursRepository;
+    @Autowired
+    private InscriptionRepository inscriptionRepository;
 
     @Override
     public List<Skieur> retrieveAllSkieurs() {
@@ -107,6 +106,10 @@ public class ISkieurServiceImp implements ISkieurService{
             Cours cours = coursRepository.findById(inscription.getCours().getNumCours()).orElse(null);
             Assert.notNull(cours, " No cours found with this id!");
             inscription.setCours(cours);
+            skieurRepository.saveAndFlush(skieur);
+            inscription.setSkieur(skieur);
+            inscriptionRepository.save(inscription);
+            //Exception handler
         });
 
         return skieur;
