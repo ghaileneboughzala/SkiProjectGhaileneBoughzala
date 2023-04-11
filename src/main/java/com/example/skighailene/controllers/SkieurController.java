@@ -63,5 +63,6 @@ public class SkieurController {
     @GetMapping("findByNameAndSupport/{support}/{nom}")
     public List<Skieur> findByMoniteurNameAndSupportTypeJPQL(@PathVariable Support support, @PathVariable String nom) {
         return iSkieurService.findByMoniteurNameAndSupportTypeJPQL(support, nom);
+        //r
     }
 }
