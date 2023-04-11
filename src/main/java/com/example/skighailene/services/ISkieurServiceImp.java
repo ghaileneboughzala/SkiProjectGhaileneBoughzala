@@ -1,13 +1,10 @@
 package com.example.skighailene.services;
 
-import com.example.skighailene.entities.Abonnement;
-import com.example.skighailene.entities.TypeAbonnement;
+import com.example.skighailene.entities.*;
 import com.example.skighailene.repositories.AbonnementRepository;
 import com.example.skighailene.repositories.PisteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.example.skighailene.entities.Piste;
-import com.example.skighailene.entities.Skieur;
 import com.example.skighailene.repositories.SkieurRepository;
 import org.springframework.util.Assert;
 
@@ -83,6 +80,11 @@ public class ISkieurServiceImp implements ISkieurService{
     @Override
     public List<Skieur> getSkieurByAbonnement_TypeAbon(TypeAbonnement typeAbonnement) {
         return skieurRepository.findByAbonnementTypeAbon(typeAbonnement);
+    }
+
+    @Override
+    public List<Skieur> findByMoniteurNameAndSupportTypeJPQL(Support support, String nom) {
+        return skieurRepository.findByMoniteurNameAndSupportTypeJPQL(support, nom);
     }
 
 

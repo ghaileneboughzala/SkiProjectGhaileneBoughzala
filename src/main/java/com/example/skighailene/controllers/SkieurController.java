@@ -1,5 +1,6 @@
 package com.example.skighailene.controllers;
 
+import com.example.skighailene.entities.Support;
 import com.example.skighailene.entities.TypeAbonnement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -57,5 +58,10 @@ public class SkieurController {
     @GetMapping("getSkieurParTypeAbon/{type}")
     public List<Skieur> getSkieurParTypeAbon(@PathVariable TypeAbonnement type){
         return  iSkieurService.retrieveSkiersBySubscriptionType(type);
+    }
+
+    @GetMapping("findByNameAndSupport/{support}/{nom}")
+    public List<Skieur> findByMoniteurNameAndSupportTypeJPQL(@PathVariable Support support, @PathVariable String nom) {
+        return iSkieurService.findByMoniteurNameAndSupportTypeJPQL(support, nom);
     }
 }
