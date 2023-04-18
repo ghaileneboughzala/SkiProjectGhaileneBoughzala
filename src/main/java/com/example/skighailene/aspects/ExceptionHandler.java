@@ -11,7 +11,7 @@ public class ExceptionHandler {
     public Map<String, String> HandleException(Exception exception){
 
         Map map = new HashMap<>();
-        map.put("error", exception.getMessage());
+        map.put("Erreur ya fathi", exception.getMessage());
         return map;
 
     }
