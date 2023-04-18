@@ -98,20 +98,24 @@ public class ISkieurServiceImp implements ISkieurService{
 
     @Override
     public Skieur addSkierAndAssignToCourse(Skieur skieur) {
-        Assert.notNull(skieur.getAbonnement(),"Abonnement must not be empty");
-        Assert.notNull(skieur.getInscriptions(),"Inscriptions must not be empty");
+        Assert.notNull(skieur.getAbonnement(),"Abonnement must not be empty"); //Je vérifie si l'abobjet abonnement existe
+        Assert.notNull(skieur.getInscriptions(),"Inscriptions must not be empty"); // Je vérifie l'existance de l'objet Insctiption
         Set<Inscription> inscriptions=skieur.getInscriptions();
-        inscriptions.forEach(inscription ->  {
+        inscriptions.forEach(inscription ->  { //Je parcoue la liste des inscriptions et je m'assure que chaque inscri contient un cours
             Assert.notNull(inscription.getCours().getNumCours(), " Cours must be entered !!");
             Cours cours = coursRepository.findById(inscription.getCours().getNumCours()).orElse(null);
             Assert.notNull(cours, " No cours found with this id!");
-            inscription.setCours(cours);
-            skieurRepository.saveAndFlush(skieur);
+            inscription.setCours(cours); //Inscription contient un seul cours donc l'inscription gérera la relation et affectera l'inscription au cours
             inscription.setSkieur(skieur);
             inscriptionRepository.save(inscription);
             //Exception handler
         });
-
+        skieurRepository.save(skieur);//Je l'insère dans cette partie ( en dehors de la boucle for vu qu'il ne va pas enregistrer les ctrls de saisie et j'implémenterai une autre boucle for
+        //Pas de différence entre save and saveandflush juste la notification instantannée pour flush
+        skieur.getInscriptions().forEach(inscription -> {
+            inscription.setSkieur(skieur);
+            inscriptionRepository.save(inscription);
+        });
         return skieur;
     }
 

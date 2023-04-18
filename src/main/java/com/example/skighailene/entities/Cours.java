@@ -1,5 +1,6 @@
 package com.example.skighailene.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,5 +30,6 @@ public class Cours {
 
     private Support support;
     @OneToMany(mappedBy = "cours")
+    @JsonIgnore
     private List<Inscription> inscriptions;
 }
