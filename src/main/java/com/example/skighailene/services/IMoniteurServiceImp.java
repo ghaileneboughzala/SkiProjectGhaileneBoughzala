@@ -1,5 +1,6 @@
 package com.example.skighailene.services;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import com.example.skighailene.repositories.MoniteurRepository;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j //elle va déclarer un espace log dans cette classe et dans void test je vais définir le message
 @Service
 public class IMoniteurServiceImp implements IMoniteurService{
 
@@ -45,6 +47,10 @@ public class IMoniteurServiceImp implements IMoniteurService{
     @Scheduled(cron = "0 0 0 * * MON-FRI" )
     @Override
     public void testScheduler() {
+
+        //le message de retour
+        log.info("4ds4 hello");
+        System.out.println();
 
     }
 }
