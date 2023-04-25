@@ -13,4 +13,6 @@ public interface IMoniteurService {
     Moniteur updateMoniteur (Moniteur moniteur);
     Optional<Moniteur> retrieveMoniteur (Long numMoniteur);
     void removeMoniteur  (Long numMoniteur);
+
+    void testScheduler();
 }

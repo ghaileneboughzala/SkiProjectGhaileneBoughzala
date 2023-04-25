@@ -1,6 +1,7 @@
 package com.example.skighailene.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import com.example.skighailene.entities.Moniteur;
 import com.example.skighailene.repositories.MoniteurRepository;
@@ -36,6 +37,14 @@ public class IMoniteurServiceImp implements IMoniteurService{
     @Override
     public void removeMoniteur(Long numMoniteur) {
         moniteurRepository.deleteById(numMoniteur);
+
+    }
+
+    @Scheduled(fixedDelay = 60000)
+    @Scheduled(fixedRate = 60000)
+    @Scheduled(cron = "0 0 0 * * MON-FRI" )
+    @Override
+    public void testScheduler() {
 
     }
 }
