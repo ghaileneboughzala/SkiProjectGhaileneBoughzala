@@ -14,11 +14,10 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cours {
+public class Cours extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-     private long numCours;
+     //On l'a modifiée ( best practice base entity )
+     private long id;
 
     private int niveau;
 
